@@ -6,7 +6,7 @@
 /*   By: sben-ela <sben-ela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:24:04 by aybiouss          #+#    #+#             */
-/*   Updated: 2023/02/13 21:58:16 by sben-ela         ###   ########.fr       */
+/*   Updated: 2023/02/22 09:57:51 by sben-ela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int ft_strlen(char *str)
     int i;
 
     i = 0;
+	if(!str)
+		return (0);
     while(str[i])
         i++;
     return(i);
@@ -32,19 +34,6 @@ int		ft_strcmp(char *s1, char *s2)
  	while (s1[i] == s2[i] && s1[i] && s2[i])
  		i++;
  	return (s1[i] - s2[i]);
-}
-
-int ft_strchr (char *str, char c)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i++] == c)
-			return(1);
-	}
-	return(0);
 }
 
 int	ft_lstsize(t_shell *lst)

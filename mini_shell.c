@@ -1,6 +1,5 @@
 #include "mini_shell.h"
 
-
 t_shell	*ft_lstlast(t_shell *lst)
 {
 	if (!lst)
@@ -33,7 +32,9 @@ t_shell	*ft_lstnew(char *content, int type, char **env)
 	x = malloc(sizeof(t_shell));
 	if (!x)
 		return (NULL);
-	x->cmds = ft_split(content, ' ');
+	x->cmds = ft_split_v2(content, ' ');
+	if(!x->cmds)
+		return (0);
 	while(x->cmds[i])
 	{
 		if(x->cmds[i][0] != '\'' && x->cmds[i][ft_strlen(x->cmds[i])] != '\'')
@@ -49,6 +50,7 @@ t_shell	*ft_lstnew(char *content, int type, char **env)
 		}
 		i++;
 	}
+	//exit(0);
     x->type = type;
 	x->next = NULL;
 	return (x);
@@ -78,11 +80,11 @@ t_shell *parse_line(char *line, char **env)
 	j = 0;
 	shell = 0;
 	// split line with pipe
-	args = ft_split(line, '|');
+	args = ft_split_v2(line, '|');
+	if(!args)
+		return (0);
 	while(args[++i])
-	{
 		args[i] = ft_strtrim(args[i], " ");
-	}
 	i = 0;
 	while (args[i])
 	{
@@ -98,6 +100,7 @@ t_shell *parse_line(char *line, char **env)
 		ft_lstadd_back(&shell, ft_lstnew(args[i], 3, env));
 		i++;
 	}
+	free(line);
 	return(shell);
 }
 
@@ -118,7 +121,7 @@ void sigint_handler(int sig) {
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		//rl_replace_line("", 1);
+		rl_replace_line("", 1);
 		rl_redisplay();
 	}
 	else if(sig == SIGQUIT)
@@ -136,25 +139,25 @@ void mini_shell(char **env)
 			exit(0);
 		add_history(read);
 		read += ft_checkspace(read);
-		if (!handle_redirect(read) && !count_single_couts(read) && !count_double_couts(read) && !handle_pipes(read))
+		if (read[0] && !parse_syntax(read) && !count_single_couts(read) && !count_double_couts(read))
 		{
-			read = parse_redirect(read);
-			//printf("read : %s\n", read);
-			shell = parse_line(read, env);
-			int i = 0;
-			while(shell)
-			{
-				i = 0;
-				while(shell->cmds[i])
-				{
-					printf("%s ", shell->cmds[i++]);
-				}
-				printf("\n");
-				shell = shell->next;	
-			}
+		 	read = parse_redirect(read);
+			 shell = parse_line(read, env);
+			 int i = 0;
+			 while(shell)
+			 {
+			 	i = 0;
+			 	while(shell->cmds[i])
+			 	{
+			 		printf("%s ", shell->cmds[i++]);
+			 	}
+			 	printf("\n");
+			 	shell = shell->next;	
+			 }
+			//system("leaks mini_shell");
 		}
-		else
-			ft_error("syntax error");
+		 else if(read[0])
+		 	ft_error("syntax error");
 	}
 }
 int main(int ac, char **av, char **env)

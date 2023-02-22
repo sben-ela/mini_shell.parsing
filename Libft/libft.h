@@ -6,7 +6,7 @@
 /*   By: sben-ela <sben-ela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 13:37:39 by aybiouss          #+#    #+#             */
-/*   Updated: 2023/02/15 16:03:44 by sben-ela         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:01:28 by sben-ela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*ft_memmove(void *dst, const void *src, size_t length);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
-char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim(char *s1, char *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	**second_split(char const *s, char c);

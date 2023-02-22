@@ -24,12 +24,14 @@ int getend(char *str)
 char *find_value(char *var, char **env)
 {
     char *value;
+    char *str;
     int i;
 
     i = 0;
+    str = ft_strjoin(var, "=");
     while(env[i])
     {
-        value = ft_strnstr(env[i], ft_strjoin(var, "="), ft_strlen(var) + 1);
+        value = ft_strnstr(env[i], str, ft_strlen(var) + 1);
         if(value)
             return(value + ft_strlen(var) + 1);
         i++;
@@ -60,7 +62,7 @@ char    *get_value(char *str,char **env)
 {
     char *var;
     char *string;
-    char *value;
+    char *value = 0;
 
     string = "";
     while(*str)
@@ -75,8 +77,11 @@ char    *get_value(char *str,char **env)
             string = ft_strjoin(string, value);
             str += ft_strlen(var) + 1;
         }
-        string = char_join(string, *str);
-        str++;
+        else
+        {
+            string = char_join(string, *str);
+            str++;
+        }
     }
     return(string);
 }

@@ -3,7 +3,8 @@ READ = -L/goinfre/sben-ela/homebrew/opt/readline/lib
 INCLUDE = -I/goinfre/sben-ela/homebrew/opt/readline/include
 PROG = mini_shell
 LIBFT = Libft/libft.a
-SOURCES = mini_shell.c ft_split.c utils.c parse_redirect.c  ft_error.c handle_couts.c expanding.c $(LIBFT)
+SOURCES = mini_shell.c ft_split_v2.c utils.c parse_redirect.c  ft_error.c \
+		handle_couts.c expanding.c parse.c  $(LIBFT)
 
 OBJECTS = $(SOURCES:.c=.o)
 

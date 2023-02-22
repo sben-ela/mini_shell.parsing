@@ -6,7 +6,7 @@
 /*   By: sben-ela <sben-ela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 11:40:53 by sben-ela          #+#    #+#             */
-/*   Updated: 2023/02/21 11:47:55 by sben-ela         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:51:54 by sben-ela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	count_single_couts(char *line)
 			count++;
 		i++;
 	}
-	printf("SINGLE : %d\n", count);
+	//printf("SINGLE : %d\n", count);
 	return(count % 2);
 }
 
@@ -115,6 +115,6 @@ int	count_double_couts(char *line)
 			count++;
 		i++;
 	}
-	printf("DOUBLE : %d\n", count);
+	//printf("DOUBLE : %d\n", count);
 	return(count % 2);
 }
